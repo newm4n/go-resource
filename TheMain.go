@@ -65,6 +65,8 @@ func binIt(target, pack string, files []string, basepath, newpath string) error 
 		}
 	}
 
+	fmt.Printf("Writing To : %s\n", target)
+
 	var buffer bytes.Buffer
 	buffer.WriteString(fmt.Sprintf("package %s\n\n", pack))
 
@@ -105,9 +107,8 @@ func binIt(target, pack string, files []string, basepath, newpath string) error 
 		if err != nil {
 			fmt.Printf("\t%s ... Error : %v\n", src, err)
 		} else {
-			fmt.Printf("\n\t#%d Writing Entry : %s ... ", idx+1, src)
-
 			name := fmt.Sprintf("%s%s", newpath, src[len(basepath):])
+			fmt.Printf("\n\t#%d Writing Entry : %s ... ", idx+1, name)
 
 			if mimeMap[src][:5] == "text/" || mimeMap[src] == "application/json" ||
 				mimeMap[src] == "application/octet-stream" {
