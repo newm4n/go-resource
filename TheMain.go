@@ -5,7 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/gabriel-vasile/mimetype"
-	"gitlab.com/newm4n/binit/globber"
+	"github.com/newm4n/go-resource/globber"
 	"io/ioutil"
 	"os"
 	"strings"
