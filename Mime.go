@@ -6,10 +6,12 @@ import (
 	"strings"
 )
 
+// MimeType collect all the different types
 type MimeType struct {
 	MimeMap map[string]string
 }
 
+// MimeForFileName utility mimetype lokup
 func (m *MimeType) MimeForFileName(filename string) (string, error) {
 	reg := regexp.MustCompile(`[a-zA-Z0-9]+$`)
 	if reg.MatchString(filename) {
@@ -20,8 +22,9 @@ func (m *MimeType) MimeForFileName(filename string) (string, error) {
 	}
 }
 
+// IsPrintableChar checks if a type is printable
 func (m *MimeType) IsPrintableChar(char byte) bool {
-	if char & 0x80 == 0x80 {
+	if char&0x80 == 0x80 {
 		return false
 	} else if char >= 0x20 || char == 0x09 || char == 0x0A || char == 0x0D || char == 239 {
 		return true
@@ -30,16 +33,18 @@ func (m *MimeType) IsPrintableChar(char byte) bool {
 	}
 }
 
+// IsAllPrintableChar checks for the printable chars
 func (m *MimeType) IsAllPrintableChar(bytes []byte) bool {
 	nonprintable := 0
-	for _, b := range bytes{
+	for _, b := range bytes {
 		if !m.IsPrintableChar(b) {
 			nonprintable++
 		}
 	}
-	return float64(nonprintable) / float64(len(bytes)) < 0.03
+	return float64(nonprintable)/float64(len(bytes)) < 0.03
 }
 
+// MimeForExtension lookup short code to string extensions
 func (m *MimeType) MimeForExtension(extension string) (string, error) {
 	ex := strings.ToLower(extension)
 	if m.MimeMap == nil {
