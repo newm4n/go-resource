@@ -4,10 +4,11 @@ import (
 	"bytes"
 	"flag"
 	"fmt"
-	"github.com/newm4n/go-resource/globber"
 	"io/ioutil"
 	"os"
 	"strings"
+
+	"github.com/newm4n/go-resource/globber"
 )
 
 func main() {
@@ -92,6 +93,7 @@ func binIt(target, pack string, files []string, basepath, newpath string) error 
 		}
 	}
 
+	buffer.WriteString(fmt.Sprintf("// GetStaticResource returns all the stuffed static resources \n"))
 	buffer.WriteString(fmt.Sprintf("func GetStaticResource() (map[string][]byte,map[string]string) {\n"))
 	buffer.WriteString(fmt.Sprintf("		staticMap := make(map[string][]byte)\n"))
 	buffer.WriteString(fmt.Sprintf("		staticMime := make(map[string]string)\n"))
